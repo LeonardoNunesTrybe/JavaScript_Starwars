@@ -2,7 +2,20 @@ import React, { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
 export default function Table() {
-  const { filterPlanets } = useContext(PlanetContext);
+  const { filterPlanets, finalFilter } = useContext(PlanetContext);
+
+  const completeTable = filterPlanets.filter((planet) => finalFilter.every((final) => {
+    if (final.comparison === 'maior que') {
+      return Number(planet[final.column]) > Number(final.num);
+    }
+    if (final.comparison === 'menor que') {
+      return Number(planet[final.column]) < Number(final.num);
+    }
+    if (final.comparison === 'igual a') {
+      return Number(planet[final.column]) === Number(final.num);
+    }
+    return false;
+  }));
 
   return (
     <table>
@@ -25,7 +38,7 @@ export default function Table() {
       </thead>
       <tbody>
         {
-          filterPlanets.map((planet) => (
+          completeTable.map((planet) => (
             <tr key={ planet.name }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
