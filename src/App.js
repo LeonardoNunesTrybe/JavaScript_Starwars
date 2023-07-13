@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import planetAPI from './service/RequestAPI';
 import PlanetContext from './context/PlanetContext';
 import Table from './components/Table';
+import Filters from './components/Filters';
 
 function App() {
   const [planets, setPlanets] = useState([]);
@@ -22,6 +23,7 @@ function App() {
     <PlanetContext.Provider
       value={ { planets, setPlanets, filterPlanets, setFilterPlanets } }
     >
+      <Filters />
       <Table />
     </PlanetContext.Provider>
   );
