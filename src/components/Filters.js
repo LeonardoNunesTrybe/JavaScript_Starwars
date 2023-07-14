@@ -101,7 +101,10 @@ export default function Filters() {
       </button>
 
       {finalFilter.map((filter) => (
-        <span key={ filter.column }>
+        <span
+          key={ filter.column }
+          data-testid="filter"
+        >
           {filter.column}
           {' '}
           {filter.comparison}
